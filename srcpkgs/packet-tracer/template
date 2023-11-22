@@ -1,0 +1,23 @@
+# Template file for 'packet-tracer'
+pkgname=packet-tracer
+version=821
+revision=1
+depends=""
+short_desc="Cisco Packet Tracer"
+maintainer="João Pinto <joaopintojpgp@gmail.com>"
+license="custom"
+homepage="https://www.netacad.com/courses/packet-tracer"
+distfiles="https://archive.org/download/cisco-packet-tracer-${version}-ubuntu-64bit/CiscoPacketTracer_${version}_Ubuntu_64bit.deb"
+checksum=428338ac32a474d4c9e930433c202cfa5d7b24b9eca50165972f41eb484e07ba
+skiprdeps=""
+repository=nonfree
+restricted=yes
+nostrip=yes
+
+do_install() {
+	# vbin usr/local/bin/sqldeveloper
+	# rm -rf usr/local
+	# vcopy "*" /
+	# vlicense "${FILESDIR}"/sqldeveloper-license
+}
+

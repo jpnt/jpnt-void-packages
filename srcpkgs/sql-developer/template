@@ -1,0 +1,23 @@
+# Template file for 'sql-developer'
+pkgname=sql-developer
+version=23.1.0.097.1607
+revision=1
+depends="openjdk11"
+short_desc="Oracle SQL Developer"
+maintainer="João Pinto <joaopintojpgp@gmail.com>"
+license="custom:OTN"
+homepage="https://www.oracle.com/database/sqldeveloper"
+# distfiles="https://download.oracle.com/otn/java/sqldeveloper/sqldeveloper-${version}.noarch.rpm"
+distfiles="https://download.fileeagle.com/files/2023/06/sqldeveloper-${version}.noarch.rpm"
+checksum=66f825fba46f1e39c6062c7186414f6cb763d2894fd19cbc06b1664b1b72b647
+skiprdeps="/opt/sqldeveloper/modules/javafx/linux-x64/lib/libavplugin-56.so /opt/sqldeveloper/modules/javafx/linux-x64/lib/libavplugin-54.so /opt/sqldeveloper/modules/javafx/linux-x64/lib/libavplugin-ffmpeg-58.so /opt/sqldeveloper/modules/javafx/linux-x64/lib/libavplugin-57.so /opt/sqldeveloper/modules/javafx/linux-x64/lib/libavplugin-ffmpeg-56.so /opt/sqldeveloper/modules/javafx/linux-x64/lib/libavplugin-ffmpeg-59.so /opt/sqldeveloper/modules/javafx/linux-x64/lib/libavplugin-ffmpeg-57.so"
+repository=nonfree
+restricted=yes
+nostrip=yes
+
+do_install() {
+	vbin usr/local/bin/sqldeveloper
+	rm -rf usr/local
+	vcopy "*" /
+	vlicense "${FILESDIR}"/sqldeveloper-license
+}
