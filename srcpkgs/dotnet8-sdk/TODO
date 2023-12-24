@@ -1,0 +1,9 @@
+TODO
+
+* add xbps alternatives support (in the future to change between various sdks)
+
+* add amd64-musl support
+
+* add i686 support
+
+* add aarch64 support

@@ -2,7 +2,7 @@
 
 This repository contains additional XBPS source packages to be built for the Void Linux distribution.
 
-The needed utilities to build these packages are not present here.
+The needed utilities to build these packages are not present here. This is the environment that i use.
 This repository merely serves to hold additional packages that may or may not be pushed to the master branch of void-packages.
 
 ## Usage
@@ -17,3 +17,4 @@ https://github.com/void-linux/void-packages
 
 - sql-developer
 
+- dotnet8-sdk

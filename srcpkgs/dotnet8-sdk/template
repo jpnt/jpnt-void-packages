@@ -1,0 +1,27 @@
+# Template file for 'dotnet8-sdk'
+pkgname=dotnet8-sdk
+version=8.0.100
+revision=1
+# archs="x86_64 x86_64-musl"
+depends="glibc icu-libs mit-krb5-libs libgcc libgssglue libssl1.1 libstdc++ zlib lttng-ust-devel"
+short_desc="Microsoft SDK for building and running cross-platform applications"
+maintainer="João Pinto <joaopintojpgp@gmail.com>"
+license="MIT"
+homepage="https://dotnet.microsoft.com"
+distfiles="https://download.visualstudio.microsoft.com/download/pr/5226a5fa-8c0b-474f-b79a-8984ad7c5beb/3113ccbf789c9fd29972835f0f334b7a/dotnet-sdk-${version}-linux-x64.tar.gz"
+checksum=550692ae3233e69692822b8be31bb01c5a2b60c3cfa59e9bfce8278b99f36211
+
+do_install() {
+	DOTNET_ROOT="/usr/lib/dotnet/dotnet8"
+	PROFILE_DIR="/etc/profile.d"
+
+	vmkdir $DOTNET_ROOT
+	vmkdir $PROFILE_DIR
+
+	vcopy * $DOTNET_ROOT
+	vcopy $FILESDIR/dotnet.sh $PROFILE_DIR/dotnet.sh
+
+	ln -sf $DOTNET_ROOT/dotnet /usr/bin/dotnet
+
+	vlicense LICENSE.txt
+}
