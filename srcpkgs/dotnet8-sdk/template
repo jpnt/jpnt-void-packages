@@ -1,27 +1,55 @@
 # Template file for 'dotnet8-sdk'
 pkgname=dotnet8-sdk
-version=8.0.100
+version=8.0.401
 revision=1
-# archs="x86_64 x86_64-musl"
+_dotnet_ver="${version%%.*}"
+_dotnet_home="usr/lib/dotnet/dotnet${_dotnet_ver}"
+archs="x86_64 x86_64-musl aarch64 aarch64-musl armv7l armv6l"
 depends="glibc icu-libs mit-krb5-libs libgcc libgssglue libssl1.1 libstdc++ zlib lttng-ust-devel"
-short_desc="Microsoft SDK for building and running cross-platform applications"
+short_desc="Microsoft SDK for building cross-platform applications"
 maintainer="João Pinto <joaopintojpgp@gmail.com>"
 license="MIT"
 homepage="https://dotnet.microsoft.com"
-distfiles="https://download.visualstudio.microsoft.com/download/pr/5226a5fa-8c0b-474f-b79a-8984ad7c5beb/3113ccbf789c9fd29972835f0f334b7a/dotnet-sdk-${version}-linux-x64.tar.gz"
-checksum=550692ae3233e69692822b8be31bb01c5a2b60c3cfa59e9bfce8278b99f36211
+alternatives="dotnet:/usr/lib/dotnet/default-dotnet:/${_dotnet_home}"
+
+case "$XBPS_TARGET_MACHINE" in
+	x86_64)
+		distfiles="https://download.visualstudio.microsoft.com/download/pr/db901b0a-3144-4d07-b8ab-6e7a43e7a791/4d9d1b39b879ad969c6c0ceb6d052381/dotnet-sdk-${version}-linux-x64.tar.gz"
+		checksum=6231d3902d2b2d8e73a3d681c5cbaacc95be35bdc02e25bd3947d0ab8629f9f9
+		;;
+	x86_64-musl)
+		distfiles=
+		checksum=
+		;;
+	aarch64)
+		distfiles="https://download.visualstudio.microsoft.com/download/pr/14742499-fc32-461e-bdb8-67b147763eee/c14113944f734526153f1aaac38ddfca/dotnet-sdk-${version}-linux-arm64.tar.gz"
+		checksum=
+		;;
+	aarch64-musl)
+		distfiles=
+		checksum=
+		;;
+	armv7l)
+		distfiles=
+		checksum=
+		;;
+	armv6l)
+		distfiles=
+		checksum=
+		;;
+	*) broken="Unsupported architecture" ;;
+esac
 
 do_install() {
-	DOTNET_ROOT="/usr/lib/dotnet/dotnet8"
-	PROFILE_DIR="/etc/profile.d"
+	# TODO: Clean
+	# PROFILE_DIR="/etc/profile.d"
+	# vmkdir $PROFILE_DIR
+	# vcopy $FILESDIR/dotnet.sh $PROFILE_DIR/dotnet.sh
 
-	vmkdir $DOTNET_ROOT
-	vmkdir $PROFILE_DIR
+	vmkdir ${_dotnet_home}
+	vcopy * ${_dotnet_home}
 
-	vcopy * $DOTNET_ROOT
-	vcopy $FILESDIR/dotnet.sh $PROFILE_DIR/dotnet.sh
-
-	ln -sf $DOTNET_ROOT/dotnet /usr/bin/dotnet
+	vbin dotnet
 
 	vlicense LICENSE.txt
 }

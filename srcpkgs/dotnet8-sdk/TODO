@@ -1,9 +1,9 @@
 TODO
 
-* add xbps alternatives support (in the future to change between various sdks)
-
-* add amd64-musl support
-
-* add i686 support
-
+* compiled template, not binary
+* add x86_64-musl support
+* add aarch64-musl support
 * add aarch64 support
+* add armv7l support
+* add armv6l support
+* add i686 support (not available as binary, for Linux. Thanks MS)
